@@ -28,7 +28,7 @@ namespace MoviesApp
 			}
 
 			cell.TextLabel.Text = this.Movies[indexPath.Row].Title;
-			cell.DetailTextLabel.Text = this.Movies[indexPath.Row].ReleaseDate.ToShortDateString();
+			cell.DetailTextLabel.Text = this.Movies[indexPath.Row].Overview;
 
 			return cell;
 		}

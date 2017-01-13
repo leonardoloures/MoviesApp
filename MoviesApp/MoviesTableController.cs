@@ -15,7 +15,7 @@ namespace MoviesApp
 		{
 			base.ViewDidLoad();
 
-			var movies = MoviesDb.GetHardcodedMovies();
+			var movies = Tmdb.GetUpcomingMovies();
 
 			TableView.Source = new MoviesTableSource(movies);
 		}
