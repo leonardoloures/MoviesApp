@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviesApp", "MoviesApp\MoviesApp.csproj", "{70217555-7725-4BDB-B46D-4E8C95886DEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70217555-7725-4BDB-B46D-4E8C95886DEF}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{70217555-7725-4BDB-B46D-4E8C95886DEF}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{70217555-7725-4BDB-B46D-4E8C95886DEF}.Release|iPhone.ActiveCfg = Release|iPhone
+		{70217555-7725-4BDB-B46D-4E8C95886DEF}.Release|iPhone.Build.0 = Release|iPhone
+		{70217555-7725-4BDB-B46D-4E8C95886DEF}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{70217555-7725-4BDB-B46D-4E8C95886DEF}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{70217555-7725-4BDB-B46D-4E8C95886DEF}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{70217555-7725-4BDB-B46D-4E8C95886DEF}.Debug|iPhone.Build.0 = Debug|iPhone
+	EndGlobalSection
+EndGlobal
