@@ -27,10 +27,18 @@ namespace MoviesApp
 				cell = new UITableViewCell(UITableViewCellStyle.Subtitle, this.CellIdentifier);
 			}
 
-			cell.TextLabel.Text = this.Movies[indexPath.Row].Title;
-			cell.DetailTextLabel.Text = this.Movies[indexPath.Row].Overview;
+			var movie = this.Movies[indexPath.Row];
+
+			cell.TextLabel.Text = movie.Title;
+			cell.DetailTextLabel.Text = movie.Overview;
+			cell.ImageView.Image = movie.PosterImage;
 
 			return cell;
+		}
+
+		public override nfloat GetHeightForRow(UITableView tableView, Foundation.NSIndexPath indexPath)
+		{
+			return 100;
 		}
 	}
 }
