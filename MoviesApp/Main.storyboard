@@ -14,7 +14,7 @@
                         <autoresizingMask key="autoresizingMask" heightSizable="YES" widthSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="8" reuseIdentifier="TableCell" style="IBUITableViewCellStyleSubtitle" textLabel="54" detailTextLabel="55" imageView="56">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="8" reuseIdentifier="MovieCell" style="IBUITableViewCellStyleSubtitle" textLabel="54" detailTextLabel="55" imageView="56">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8" id="9">
@@ -43,13 +43,30 @@
                                 </tableViewCellContentView>
                                 <connections/>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="406" style="IBUITableViewCellStyleDefault" textLabel="408" reuseIdentifier="LoadMoreCell">
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="406" id="407">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Load more..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="408">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="4" id="6"/>
                             <outlet property="delegate" destination="4" id="7"/>
                         </connections>
                     </tableView>
-                    <navigationItem title="Title" id="277" key="navigationItem"/>
+                    <navigationItem id="277" key="navigationItem" title="Upcoming"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -57,7 +74,7 @@
         </scene>
         <scene sceneID="77">
             <objects>
-                <viewController id="78" sceneMemberID="viewController" customClass="MovieController" storyboardIdentifier="MovieController">
+                <viewController id="78" sceneMemberID="viewController" customClass="MovieController" storyboardIdentifier="MovieController" title="Details...">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="75"/>
                         <viewControllerLayoutGuide type="bottom" id="76"/>

@@ -7,6 +7,9 @@ namespace MoviesApp
 {
     public partial class MoviesTableController : UITableViewController
     {
+		private MoviesTableSource MoviesTableSource;
+		private int NextPage = 1;
+
         public MoviesTableController (IntPtr handle) : base (handle)
         {
         }
@@ -15,9 +18,22 @@ namespace MoviesApp
 		{
 			base.ViewDidLoad();
 
-			var movies = Tmdb.GetUpcomingMovies();
+			this.MoviesTableSource = new MoviesTableSource(this);
+			this.TableView.Source = this.MoviesTableSource;
 
-			TableView.Source = new MoviesTableSource(movies, this.NavigationController);
+			this.LoadMoreMovies();
+		}
+
+		public void LoadMoreMovies()
+		{
+			var moreMovies = Tmdb.GetUpcomingMovies(this.NextPage);
+			if (moreMovies.Count > 0)
+			{
+				this.NextPage++;
+			}
+
+			this.MoviesTableSource.AddMovies(moreMovies);
+			this.TableView.ReloadData();
 		}
     }
 }

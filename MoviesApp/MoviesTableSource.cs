@@ -7,51 +7,86 @@ namespace MoviesApp
 	public class MoviesTableSource: UITableViewSource
 	{
 		private List<Movie> Movies;
-		private string CellIdentifier = "TableCell";
+		private string MovieCellIdentifier = "MovieCell";
+		private string LoadMoreCellIdentifier = "LoadMoreCell";
+
+		private MoviesTableController MoviesTableController;
 		private UINavigationController NavigationController;
 
-		public MoviesTableSource(List<Movie> movies, UINavigationController navigationController)
+		public MoviesTableSource(MoviesTableController moviesTableController)
 		{
-			this.Movies = movies;
-			this.NavigationController = navigationController;
+			this.Movies = new List<Movie>();
+
+			this.MoviesTableController = moviesTableController;
+			this.NavigationController = moviesTableController.NavigationController;
 		}
 
 		public override nint RowsInSection(UITableView tableview, nint section)
 		{
-			return this.Movies.Count;
+			return this.Movies.Count + 1;
+		}
+
+		public void AddMovies(List<Movie> movies)
+		{
+			this.Movies.AddRange(movies);
 		}
 
 		public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
 		{
-			var cell = tableView.DequeueReusableCell(this.CellIdentifier, indexPath);
-			if (cell == null)
+			if (this.IsMovieRow(indexPath))
 			{
-				cell = new UITableViewCell(UITableViewCellStyle.Subtitle, this.CellIdentifier);
+				var cell = tableView.DequeueReusableCell(this.MovieCellIdentifier, indexPath);
+				if (cell == null)
+				{
+					cell = new UITableViewCell(UITableViewCellStyle.Subtitle, this.MovieCellIdentifier);
+				}
+
+				var movie = this.Movies[indexPath.Row];
+
+				cell.TextLabel.Text = movie.Title;
+				cell.DetailTextLabel.Text = movie.Overview;
+				cell.ImageView.Image = movie.PosterImage;
+
+				return cell;
 			}
+			else
+			{
+				var cell = tableView.DequeueReusableCell(this.LoadMoreCellIdentifier, indexPath);
+				if (cell == null)
+				{
+					cell = new UITableViewCell(UITableViewCellStyle.Default, this.LoadMoreCellIdentifier);
+				}
 
-			var movie = this.Movies[indexPath.Row];
-
-			cell.TextLabel.Text = movie.Title;
-			cell.DetailTextLabel.Text = movie.Overview;
-			cell.ImageView.Image = movie.PosterImage;
-
-			return cell;
+				return cell;
+			}
 		}
 
 		public override nfloat GetHeightForRow(UITableView tableView, Foundation.NSIndexPath indexPath)
 		{
-			return 100;
+			return this.IsMovieRow(indexPath) ? 100 : 44;
 		}
 
 		public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
 		{
-			var movieController = this.NavigationController.Storyboard.InstantiateViewController("MovieController") as MovieController;
-
-			if (movieController != null)
+			if (this.IsMovieRow(indexPath))
 			{
-				movieController.Movie = this.Movies[indexPath.Row];
-				this.NavigationController.PushViewController(movieController, true);
+				var movieController = this.NavigationController.Storyboard.InstantiateViewController("MovieController") as MovieController;
+
+				if (movieController != null)
+				{
+					movieController.Movie = this.Movies[indexPath.Row];
+					this.NavigationController.PushViewController(movieController, true);
+				}
 			}
+			else
+			{
+				this.MoviesTableController.LoadMoreMovies();
+			}
+		}
+
+		private bool IsMovieRow(Foundation.NSIndexPath indexPath)
+		{
+			return indexPath.Row < this.Movies.Count;
 		}
 	}
 }
