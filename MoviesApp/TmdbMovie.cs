@@ -29,7 +29,7 @@ namespace MoviesApp
 		{
 			// TODO: get these values dynamically
 			const string secure_base_url = "https://image.tmdb.org/t/p/";
-			const string poster_size = "w154";
+			const string poster_size = "w500";
 
 			return secure_base_url + poster_size + this.poster_path;
 		}

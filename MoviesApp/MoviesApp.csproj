@@ -122,6 +122,10 @@
     <Compile Include="TmdbDiscoverMovieResponse.cs" />
     <Compile Include="TmdbMovie.cs" />
     <Compile Include="Tmdb.cs" />
+    <Compile Include="MovieController.cs" />
+    <Compile Include="MovieController.designer.cs">
+      <DependentUpon>MovieController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">

@@ -17,7 +17,7 @@ namespace MoviesApp
 
 			var movies = Tmdb.GetUpcomingMovies();
 
-			TableView.Source = new MoviesTableSource(movies);
+			TableView.Source = new MoviesTableSource(movies, this.NavigationController);
 		}
     }
 }
