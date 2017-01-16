@@ -1,6 +1,7 @@
 ﻿using System;
 using UIKit;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MoviesApp
 {
@@ -45,7 +46,12 @@ namespace MoviesApp
 
 				cell.TextLabel.Text = movie.Title;
 				cell.DetailTextLabel.Text = movie.Overview;
-				cell.ImageView.Image = movie.PosterImage;
+				cell.ImageView.Image = UIImage.FromBundle("posterDefault.png");
+
+				movie.GetPosterImage().ContinueWith(task => InvokeOnMainThread(() =>
+				{
+					cell.ImageView.Image = task.Result;
+				}));
 
 				return cell;
 			}

@@ -2,6 +2,7 @@ using Foundation;
 using System;
 using UIKit;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MoviesApp
 {
@@ -14,19 +15,19 @@ namespace MoviesApp
         {
         }
 
-		public override void ViewDidLoad()
+		public override async void ViewDidLoad()
 		{
 			base.ViewDidLoad();
 
 			this.MoviesTableSource = new MoviesTableSource(this);
 			this.TableView.Source = this.MoviesTableSource;
 
-			this.LoadMoreMovies();
+			await this.LoadMoreMovies();
 		}
 
-		public void LoadMoreMovies()
+		public async Task LoadMoreMovies()
 		{
-			var moreMovies = Tmdb.GetUpcomingMovies(this.NextPage);
+			var moreMovies = await Tmdb.GetUpcomingMovies(this.NextPage);
 			if (moreMovies.Count > 0)
 			{
 				this.NextPage++;

@@ -24,7 +24,11 @@ namespace MoviesApp
 			this.TitleText.Text = this.Movie.Title;
 			this.ReleaseDateText.Text = this.Movie.ReleaseDate.ToString("d MMM yyyy");
 			this.OverviewText.Text = this.Movie.Overview;
-			this.PosterImageView.Image = this.Movie.PosterImage;
+
+			this.Movie.GetPosterImage().ContinueWith(task => InvokeOnMainThread(() =>
+			{
+				this.PosterImageView.Image = task.Result;
+			}));
 		}
 
 		public override void ViewDidLayoutSubviews()

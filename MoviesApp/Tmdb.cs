@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace MoviesApp
@@ -19,14 +20,14 @@ namespace MoviesApp
 
 		private const string ApiKeyValue = "1f54bd990f1cdfb230adb312546d765d";
 
-		public static List<Movie> GetUpcomingMovies(int page)
+		public async static Task<List<Movie>> GetUpcomingMovies(int page)
 		{
 			var movies = new List<Movie>();
 
 			try
 			{
 				var request = Tmdb.CreateDiscoverMovieRequest(DateTime.Today, page);
-				WebResponse response = request.GetResponse();
+				WebResponse response = await request.GetResponseAsync();
 				var httpResponse = (HttpWebResponse)response;
 
 				if (httpResponse.StatusCode == HttpStatusCode.OK)

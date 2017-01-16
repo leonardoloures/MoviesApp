@@ -1,6 +1,4 @@
 ﻿using System;
-using Foundation;
-using UIKit;
 
 namespace MoviesApp
 {
@@ -19,7 +17,7 @@ namespace MoviesApp
 				Title = this.title,
 				ReleaseDate = this.release_date,
 				Overview = this.overview,
-				PosterImage = this.GetPosterImage()
+				PosterUrl = this.GetPosterUrl()
 			};
 
 			return movie;
@@ -32,22 +30,6 @@ namespace MoviesApp
 			const string poster_size = "w500";
 
 			return secure_base_url + poster_size + this.poster_path;
-		}
-
-		private UIImage GetPosterImage()
-		{
-			using (var url = new NSUrl(this.GetPosterUrl()))
-			using (var data = NSData.FromUrl(url))
-			{
-				if (data == null)
-				{
-					return UIImage.FromBundle("posterDefault.png");
-				}
-				else
-				{
-					return UIImage.LoadFromData(data);
-				}
-			}
 		}
 	}
 }
