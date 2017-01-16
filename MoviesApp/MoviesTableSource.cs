@@ -5,149 +5,149 @@ using UIKit;
 
 namespace MoviesApp
 {
-	public class MoviesTableSource: UITableViewSource
-	{
-		private List<Movie> Movies;
-		private string MovieCellIdentifier = "MovieCell";
-		private string LoadingCellIdentifier = "LoadingCell";
+    public class MoviesTableSource: UITableViewSource
+    {
+        private List<Movie> Movies;
 
-		private MoviesTableController MoviesTableController;
-		private UINavigationController NavigationController;
+        private string MovieCellIdentifier = "MovieCell";
+        private string LoadingCellIdentifier = "LoadingCell";
 
-		private bool Loading = false;
+        private MoviesTableController MoviesTableController;
+        private UINavigationController NavigationController;
 
-		public MoviesTableSource(MoviesTableController moviesTableController)
-		{
-			this.Movies = new List<Movie>();
+        private bool Loading = false;
 
-			this.MoviesTableController = moviesTableController;
-			this.NavigationController = moviesTableController.NavigationController;
-		}
+        public MoviesTableSource(MoviesTableController moviesTableController)
+        {
+            this.Movies = new List<Movie>();
 
-		public override nint RowsInSection(UITableView tableview, nint section)
-		{
-			return this.Movies.Count + 1;
-		}
+            this.MoviesTableController = moviesTableController;
+            this.NavigationController = moviesTableController.NavigationController;
+        }
 
-		public void AddMovies(List<Movie> movies)
-		{
-			this.Movies.AddRange(movies);
-		}
+        public override nint RowsInSection(UITableView tableview, nint section)
+        {
+            return this.Movies.Count + 1;
+        }
 
-		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
-		{
-			if (this.IsMovieRow(indexPath))
-			{
-				return this.GetCellForMovie(tableView, indexPath);
-			}
-			else
-			{
-				return this.GetCellForLoading(tableView, indexPath);
-			}
-		}
+        public void AddMovies(List<Movie> movies)
+        {
+            this.Movies.AddRange(movies);
+        }
 
-		public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
-		{
-			return this.IsMovieRow(indexPath) ? 100 : 44;
-		}
+        public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
+        {
+            if (this.IsMovieRow(indexPath))
+            {
+                return this.GetCellForMovie(tableView, indexPath);
+            }
+            else
+            {
+                return this.GetCellForLoading(tableView, indexPath);
+            }
+        }
 
-		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
-		{
-			if (this.IsMovieRow(indexPath))
-			{
-				this.MovieRowSelected(tableView, indexPath);
-			}
-			else
-			{
-				this.LoadingRowSelected(tableView, indexPath);
-			}
-		}
+        public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
+        {
+            return this.IsMovieRow(indexPath) ? 100 : 44;
+        }
 
-		public void StartLoading(UITableView tableView)
-		{
-			this.Loading = true;
-			this.ReloadLoadingCell(tableView);
-		}
+        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+        {
+            if (this.IsMovieRow(indexPath))
+            {
+                this.MovieRowSelected(tableView, indexPath);
+            }
+            else
+            {
+                this.LoadingRowSelected(tableView, indexPath);
+            }
+        }
 
-		public void StopLoading(UITableView tableView)
-		{
-			this.Loading = false;
-			this.ReloadLoadingCell(tableView);
-		}
+        public void StartLoading(UITableView tableView)
+        {
+            this.Loading = true;
+            this.ReloadLoadingCell(tableView);
+        }
 
-		private UITableViewCell GetCellForMovie(UITableView tableView, NSIndexPath indexPath)
-		{
-			var cell = tableView.DequeueReusableCell(this.MovieCellIdentifier, indexPath);
-			if (cell == null)
-			{
-				cell = new UITableViewCell(UITableViewCellStyle.Subtitle, this.MovieCellIdentifier);
-			}
+        public void StopLoading(UITableView tableView)
+        {
+            this.Loading = false;
+            this.ReloadLoadingCell(tableView);
+        }
 
-			var movie = this.Movies[indexPath.Row];
+        private UITableViewCell GetCellForMovie(UITableView tableView, NSIndexPath indexPath)
+        {
+            var cell = tableView.DequeueReusableCell(this.MovieCellIdentifier, indexPath) as TableViewMovieCell;
+            if (cell == null)
+            {
+                cell = new TableViewMovieCell() as TableViewMovieCell;
+            }
 
-			cell.TextLabel.Text = movie.Title;
-			cell.DetailTextLabel.Text = movie.Overview;
-			cell.ImageView.Image = UIImage.FromBundle("posterDefault.png");
+            var movie = this.Movies[indexPath.Row];
 
-			movie.GetPosterImage().ContinueWith(task => InvokeOnMainThread(() =>
-			{
-				cell.ImageView.Image = task.Result;
-			}));
+            cell.UpdateCell(movie.Title, movie.ReleaseDate.ToString("dd MMM yy"), "Drama, terror", movie.Overview);
+            cell.UpdateImage(UIImage.FromBundle("posterDefault.png"));
 
-			return cell;
-		}
+            movie.GetPosterImage().ContinueWith(task => InvokeOnMainThread(() =>
+            {
+                cell.UpdateImage(task.Result);
+            }));
 
-		private UITableViewCell GetCellForLoading(UITableView tableView, NSIndexPath indexPath)
-		{
-			var cell = tableView.DequeueReusableCell(this.LoadingCellIdentifier, indexPath) as TableViewLoadingCell;
-			if (cell == null)
-			{
-				cell = new TableViewLoadingCell(UITableViewCellStyle.Default, this.LoadingCellIdentifier);
-			}
+            return cell;
+        }
 
-			if (this.Loading)
-			{
-				cell.StartAnimating();
-			}
-			else
-			{
-				cell.StopAnimating();
-			}
+        private UITableViewCell GetCellForLoading(UITableView tableView, NSIndexPath indexPath)
+        {
+            var cell = tableView.DequeueReusableCell(this.LoadingCellIdentifier, indexPath) as TableViewLoadingCell;
+            if (cell == null)
+            {
+                cell = new TableViewLoadingCell(UITableViewCellStyle.Default, this.LoadingCellIdentifier);
+            }
 
-			return cell;
-		}
+            if (this.Loading)
+            {
+                cell.StartAnimating();
+            }
+            else
+            {
+                cell.StopAnimating();
+            }
 
-		private void MovieRowSelected(UITableView tableView, NSIndexPath indexPath)
-		{
-			var movieController = this.NavigationController.Storyboard.InstantiateViewController("MovieController") as MovieController;
-			if (movieController != null)
-			{
-				movieController.Movie = this.Movies[indexPath.Row];
-				this.NavigationController.PushViewController(movieController, true);
-			}
-		}
+            return cell;
+        }
 
-		private void LoadingRowSelected(UITableView tableView, NSIndexPath indexPath)
-		{
-			if (this.Loading == false)
-			{
-				this.MoviesTableController.LoadMoreMovies();
-			}
-		}
+        private void MovieRowSelected(UITableView tableView, NSIndexPath indexPath)
+        {
+            var movieController = this.NavigationController.Storyboard.InstantiateViewController("MovieController") as MovieController;
+            if (movieController != null)
+            {
+                movieController.Movie = this.Movies[indexPath.Row];
+                this.NavigationController.PushViewController(movieController, true);
+            }
+        }
+
+        private void LoadingRowSelected(UITableView tableView, NSIndexPath indexPath)
+        {
+            if (this.Loading == false)
+            {
+                this.MoviesTableController.LoadMoreMovies();
+            }
+        }
 
 
-		private bool IsMovieRow(NSIndexPath indexPath)
-		{
-			return indexPath.Row < this.Movies.Count;
-		}
+        private bool IsMovieRow(NSIndexPath indexPath)
+        {
+            return indexPath.Row < this.Movies.Count;
+        }
 
-		private void ReloadLoadingCell(UITableView tableView)
-		{
-			var rowsToReload = new NSIndexPath[]
-			{
-				NSIndexPath.FromRowSection(this.Movies.Count, 0)
-			};
-			tableView.ReloadRows(rowsToReload, UITableViewRowAnimation.None);
-		}
-	}
+        private void ReloadLoadingCell(UITableView tableView)
+        {
+            var rowsToReload = new NSIndexPath[]
+            {
+                NSIndexPath.FromRowSection(this.Movies.Count, 0)
+            };
+            tableView.ReloadRows(rowsToReload, UITableViewRowAnimation.None);
+        }
+    }
 }
