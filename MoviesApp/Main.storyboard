@@ -43,22 +43,35 @@
                                 </tableViewCellContentView>
                                 <connections/>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="406" style="IBUITableViewCellStyleDefault" textLabel="408" reuseIdentifier="LoadMoreCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="443" reuseIdentifier="LoadingCell" customClass="TableViewLoadingCell">
                                 <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="406" id="407">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="443" id="444">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Load more..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="408">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="447">
+                                            <rect key="frame" x="20" y="0.0" width="335" height="43.5"/>
+                                        </activityIndicatorView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="498" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" text="More...">
+                                            <rect key="frame" x="20" y="11" width="335" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint id="452" firstItem="447" firstAttribute="leading" secondItem="444" secondAttribute="leading" constant="20"/>
+                                        <constraint id="453" firstItem="447" firstAttribute="top" secondItem="444" secondAttribute="top"/>
+                                        <constraint id="454" firstItem="444" firstAttribute="trailing" secondItem="447" secondAttribute="trailing" constant="20"/>
+                                        <constraint id="455" firstItem="444" firstAttribute="bottom" secondItem="447" secondAttribute="bottom"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="ActivityIndicatorView" destination="447" id="name-outlet-447"/>
+                                    <outlet property="TitleText" destination="498" id="name-outlet-498"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

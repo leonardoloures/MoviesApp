@@ -1,7 +1,7 @@
 ﻿using System;
-using UIKit;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Foundation;
+using UIKit;
 
 namespace MoviesApp
 {
@@ -9,10 +9,12 @@ namespace MoviesApp
 	{
 		private List<Movie> Movies;
 		private string MovieCellIdentifier = "MovieCell";
-		private string LoadMoreCellIdentifier = "LoadMoreCell";
+		private string LoadingCellIdentifier = "LoadingCell";
 
 		private MoviesTableController MoviesTableController;
 		private UINavigationController NavigationController;
+
+		private bool Loading = false;
 
 		public MoviesTableSource(MoviesTableController moviesTableController)
 		{
@@ -32,67 +34,120 @@ namespace MoviesApp
 			this.Movies.AddRange(movies);
 		}
 
-		public override UITableViewCell GetCell(UITableView tableView, Foundation.NSIndexPath indexPath)
+		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 		{
 			if (this.IsMovieRow(indexPath))
 			{
-				var cell = tableView.DequeueReusableCell(this.MovieCellIdentifier, indexPath);
-				if (cell == null)
-				{
-					cell = new UITableViewCell(UITableViewCellStyle.Subtitle, this.MovieCellIdentifier);
-				}
-
-				var movie = this.Movies[indexPath.Row];
-
-				cell.TextLabel.Text = movie.Title;
-				cell.DetailTextLabel.Text = movie.Overview;
-				cell.ImageView.Image = UIImage.FromBundle("posterDefault.png");
-
-				movie.GetPosterImage().ContinueWith(task => InvokeOnMainThread(() =>
-				{
-					cell.ImageView.Image = task.Result;
-				}));
-
-				return cell;
+				return this.GetCellForMovie(tableView, indexPath);
 			}
 			else
 			{
-				var cell = tableView.DequeueReusableCell(this.LoadMoreCellIdentifier, indexPath);
-				if (cell == null)
-				{
-					cell = new UITableViewCell(UITableViewCellStyle.Default, this.LoadMoreCellIdentifier);
-				}
-
-				return cell;
+				return this.GetCellForLoading(tableView, indexPath);
 			}
 		}
 
-		public override nfloat GetHeightForRow(UITableView tableView, Foundation.NSIndexPath indexPath)
+		public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
 		{
 			return this.IsMovieRow(indexPath) ? 100 : 44;
 		}
 
-		public override void RowSelected(UITableView tableView, Foundation.NSIndexPath indexPath)
+		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 		{
 			if (this.IsMovieRow(indexPath))
 			{
-				var movieController = this.NavigationController.Storyboard.InstantiateViewController("MovieController") as MovieController;
-
-				if (movieController != null)
-				{
-					movieController.Movie = this.Movies[indexPath.Row];
-					this.NavigationController.PushViewController(movieController, true);
-				}
+				this.MovieRowSelected(tableView, indexPath);
 			}
 			else
+			{
+				this.LoadingRowSelected(tableView, indexPath);
+			}
+		}
+
+		public void StartLoading(UITableView tableView)
+		{
+			this.Loading = true;
+			this.ReloadLoadingCell(tableView);
+		}
+
+		public void StopLoading(UITableView tableView)
+		{
+			this.Loading = false;
+			this.ReloadLoadingCell(tableView);
+		}
+
+		private UITableViewCell GetCellForMovie(UITableView tableView, NSIndexPath indexPath)
+		{
+			var cell = tableView.DequeueReusableCell(this.MovieCellIdentifier, indexPath);
+			if (cell == null)
+			{
+				cell = new UITableViewCell(UITableViewCellStyle.Subtitle, this.MovieCellIdentifier);
+			}
+
+			var movie = this.Movies[indexPath.Row];
+
+			cell.TextLabel.Text = movie.Title;
+			cell.DetailTextLabel.Text = movie.Overview;
+			cell.ImageView.Image = UIImage.FromBundle("posterDefault.png");
+
+			movie.GetPosterImage().ContinueWith(task => InvokeOnMainThread(() =>
+			{
+				cell.ImageView.Image = task.Result;
+			}));
+
+			return cell;
+		}
+
+		private UITableViewCell GetCellForLoading(UITableView tableView, NSIndexPath indexPath)
+		{
+			var cell = tableView.DequeueReusableCell(this.LoadingCellIdentifier, indexPath) as TableViewLoadingCell;
+			if (cell == null)
+			{
+				cell = new TableViewLoadingCell(UITableViewCellStyle.Default, this.LoadingCellIdentifier);
+			}
+
+			if (this.Loading)
+			{
+				cell.StartAnimating();
+			}
+			else
+			{
+				cell.StopAnimating();
+			}
+
+			return cell;
+		}
+
+		private void MovieRowSelected(UITableView tableView, NSIndexPath indexPath)
+		{
+			var movieController = this.NavigationController.Storyboard.InstantiateViewController("MovieController") as MovieController;
+			if (movieController != null)
+			{
+				movieController.Movie = this.Movies[indexPath.Row];
+				this.NavigationController.PushViewController(movieController, true);
+			}
+		}
+
+		private void LoadingRowSelected(UITableView tableView, NSIndexPath indexPath)
+		{
+			if (this.Loading == false)
 			{
 				this.MoviesTableController.LoadMoreMovies();
 			}
 		}
 
-		private bool IsMovieRow(Foundation.NSIndexPath indexPath)
+
+		private bool IsMovieRow(NSIndexPath indexPath)
 		{
 			return indexPath.Row < this.Movies.Count;
+		}
+
+		private void ReloadLoadingCell(UITableView tableView)
+		{
+			var rowsToReload = new NSIndexPath[]
+			{
+				NSIndexPath.FromRowSection(this.Movies.Count, 0)
+			};
+			tableView.ReloadRows(rowsToReload, UITableViewRowAnimation.None);
 		}
 	}
 }

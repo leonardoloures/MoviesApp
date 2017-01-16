@@ -126,6 +126,10 @@
     <Compile Include="MovieController.designer.cs">
       <DependentUpon>MovieController.cs</DependentUpon>
     </Compile>
+    <Compile Include="TableViewLoadingCell.cs" />
+    <Compile Include="TableViewLoadingCell.designer.cs">
+      <DependentUpon>TableViewLoadingCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">

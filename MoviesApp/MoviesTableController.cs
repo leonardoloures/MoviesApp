@@ -13,7 +13,7 @@ namespace MoviesApp
 
         public MoviesTableController (IntPtr handle) : base (handle)
         {
-        }
+		}
 
 		public override async void ViewDidLoad()
 		{
@@ -27,11 +27,15 @@ namespace MoviesApp
 
 		public async Task LoadMoreMovies()
 		{
+			this.MoviesTableSource.StartLoading(this.TableView);
+
 			var moreMovies = await Tmdb.GetUpcomingMovies(this.NextPage);
 			if (moreMovies.Count > 0)
 			{
 				this.NextPage++;
 			}
+
+			this.MoviesTableSource.StopLoading(this.TableView);
 
 			this.MoviesTableSource.AddMovies(moreMovies);
 			this.TableView.ReloadData();
