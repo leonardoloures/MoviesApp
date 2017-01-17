@@ -61,33 +61,48 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Release date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="514" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                            <rect key="frame" x="79" y="5" width="272" height="18"/>
+                                            <rect key="frame" x="99" y="5" width="170" height="18"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" colorSpace="calibratedWhite" white="0.333333333333333" alpha="1"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="515" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                            <rect key="frame" x="79" y="21" width="272" height="21"/>
+                                            <rect key="frame" x="79" y="21" width="260" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genres" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="516" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                            <rect key="frame" x="79" y="40" width="272" height="18"/>
+                                            <rect key="frame" x="79" y="40" width="260" height="18"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" colorSpace="calibratedWhite" white="0.333333333333333" alpha="1"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="517" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" numberOfLines="2">
-                                            <rect key="frame" x="79" y="64" width="272" height="36"/>
+                                            <rect key="frame" x="79" y="64" width="260" height="36"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" colorSpace="calibratedWhite" white="0.333333333333333" alpha="1"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="532" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                            <rect key="frame" x="277" y="5" width="44" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" colorSpace="calibratedWhite" white="0.333333333333333" alpha="1"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="537" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" image="calendar.png">
+                                            <rect key="frame" x="80" y="5" width="16" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="540" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" image="star.jpg">
+                                            <rect key="frame" x="325" y="5" width="16" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
@@ -96,6 +111,9 @@
                                     <outlet property="GenresText" destination="516" id="name-outlet-516"/>
                                     <outlet property="OverviewText" destination="517" id="name-outlet-517"/>
                                     <outlet property="PosterImageView" destination="506" id="name-outlet-506"/>
+                                    <outlet property="StarsText" destination="532" id="name-outlet-532"/>
+                                    <outlet property="StarImageView" destination="540" id="name-outlet-540"/>
+                                    <outlet property="ReleaseDateImageView" destination="537" id="name-outlet-537"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -181,5 +199,7 @@
     </simulatedMetricsContainer>
     <resources>
         <image name="posterDefault.png" width="616" height="924"/>
+        <image name="calendar.png" width="32" height="32"/>
+        <image name="star.jpg" width="128" height="128"/>
     </resources>
 </document>

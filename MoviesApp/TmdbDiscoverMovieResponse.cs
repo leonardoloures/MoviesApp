@@ -8,13 +8,13 @@ namespace MoviesApp
 		public int page { get; set; }
 		public IList<TmdbMovie> results;
 
-		public List<Movie> ToMovieList()
+        public List<Movie> ToMovieList(TmdbGenreMovieListResponse tmdbGenreMovieListResponse)
 		{
 			var movies = new List<Movie>();
 
 			foreach (var tmdbMovie in this.results)
 			{
-				movies.Add(tmdbMovie.ToMovie());
+                movies.Add(tmdbMovie.ToMovie(tmdbGenreMovieListResponse));
 			}
 
 			return movies;

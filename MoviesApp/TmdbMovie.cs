@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MoviesApp
 {
@@ -9,14 +11,18 @@ namespace MoviesApp
 		public DateTime release_date { get; set; }
 		public string overview { get; set; }
 		public string poster_path { get; set; }
+        public IList<int> genre_ids { get; set; }
+        public decimal vote_average { get; set; }
 
-		public Movie ToMovie()
+        public Movie ToMovie(TmdbGenreMovieListResponse tmdbGenreMovieList)
 		{
 			var movie = new Movie()
 			{
 				Title = this.title,
 				ReleaseDate = this.release_date,
 				Overview = this.overview,
+                Genres = this.GetGenres(tmdbGenreMovieList),
+                Stars = this.vote_average,
 				PosterUrl = this.GetPosterUrl()
 			};
 
@@ -31,5 +37,22 @@ namespace MoviesApp
 
 			return secure_base_url + poster_size + this.poster_path;
 		}
+
+        private List<string> GetGenres(TmdbGenreMovieListResponse tmdbGenreMovieList)
+        {
+            var genres = new List<string>();
+            foreach (var genreId in this.genre_ids)
+            {
+                try
+                {
+                    var genre = tmdbGenreMovieList.genres.Single(x => x.id == genreId).name;
+                    genres.Add(genre);
+                }
+                catch
+                {
+                }
+            }
+            return genres;
+        }
 	}
 }

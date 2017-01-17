@@ -1,5 +1,8 @@
 ﻿using Foundation;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using UIKit;
 
@@ -12,6 +15,8 @@ namespace MoviesApp
 		public DateTime ReleaseDate { get; set; }
 		public string Overview { get; set; }
 		public string PosterUrl { get; set; }
+        public List<string> Genres { get; set; }
+        public decimal Stars { get; set; }
 
 		private UIImage PosterImage;
 
@@ -39,5 +44,26 @@ namespace MoviesApp
 
 			return this.PosterImage;
 		}
+
+        public string GetGenres()
+        {
+            if (this.Genres.Count == 0)
+            {
+                return string.Empty;
+            }
+
+            var stringBuilder = new StringBuilder();
+            var separator = string.Empty;
+
+            foreach (var genre in this.Genres)
+            {
+                stringBuilder.Append(separator);
+                stringBuilder.Append(genre);
+
+                separator = ", ";
+            }
+
+            return stringBuilder.ToString();
+        }
 	}
 }

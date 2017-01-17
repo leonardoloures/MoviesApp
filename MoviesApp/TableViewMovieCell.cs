@@ -21,12 +21,14 @@ namespace MoviesApp
             this.LayoutSubviews();
         }
 
-        public void UpdateCell(string title, string releaseDate, string genres, string overview)
+        public void UpdateCell(string title, string releaseDate, string genres, string overview, string stars)
         {
             this.TitleText.Text = title;
             this.ReleaseDateText.Text = releaseDate;
             this.GenresText.Text = genres;
             this.OverviewText.Text = overview;
+            this.StarsText.Text = stars;
+            this.StarImageView.Hidden = stars == string.Empty;
 
             this.LayoutSubviews();
         }

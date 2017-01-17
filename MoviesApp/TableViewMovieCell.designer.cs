@@ -28,7 +28,19 @@ namespace MoviesApp
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIImageView ReleaseDateImageView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel ReleaseDateText { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIImageView StarImageView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel StarsText { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -51,9 +63,24 @@ namespace MoviesApp
                 PosterImageView = null;
             }
 
+            if (ReleaseDateImageView != null) {
+                ReleaseDateImageView.Dispose ();
+                ReleaseDateImageView = null;
+            }
+
             if (ReleaseDateText != null) {
                 ReleaseDateText.Dispose ();
                 ReleaseDateText = null;
+            }
+
+            if (StarImageView != null) {
+                StarImageView.Dispose ();
+                StarImageView = null;
+            }
+
+            if (StarsText != null) {
+                StarsText.Dispose ();
+                StarsText = null;
             }
 
             if (TitleText != null) {

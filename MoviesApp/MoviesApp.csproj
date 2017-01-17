@@ -134,6 +134,8 @@
     <Compile Include="TableViewMovieCell.designer.cs">
       <DependentUpon>TableViewMovieCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="TmdbGenreMovieListResponse.cs" />
+    <Compile Include="TmdbGenre.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">
@@ -143,6 +145,8 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\posterDefault.png" />
+    <BundleResource Include="Resources\calendar.png" />
+    <BundleResource Include="Resources\star.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

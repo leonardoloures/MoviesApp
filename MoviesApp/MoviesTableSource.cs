@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Foundation;
 using UIKit;
 
@@ -86,7 +87,12 @@ namespace MoviesApp
 
             var movie = this.Movies[indexPath.Row];
 
-            cell.UpdateCell(movie.Title, movie.ReleaseDate.ToString("dd MMM yy"), "Drama, terror", movie.Overview);
+            cell.UpdateCell(
+                movie.Title,
+                movie.ReleaseDate.ToString("dd MMM yyyy"),
+                movie.GetGenres(),
+                movie.Overview,
+                movie.Stars > 0 ? movie.Stars.ToString() : string.Empty);
             cell.UpdateImage(UIImage.FromBundle("posterDefault.png"));
 
             movie.GetPosterImage().ContinueWith(task => InvokeOnMainThread(() =>
