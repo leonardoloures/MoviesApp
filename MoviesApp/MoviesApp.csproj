@@ -136,6 +136,8 @@
     </Compile>
     <Compile Include="TmdbGenreMovieListResponse.cs" />
     <Compile Include="TmdbGenre.cs" />
+    <Compile Include="SearchResultsUpdater.cs" />
+    <Compile Include="SearchResultsViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">

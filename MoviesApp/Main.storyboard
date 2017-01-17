@@ -123,6 +123,7 @@
                         </connections>
                     </tableView>
                     <navigationItem id="277" key="navigationItem" title="Upcoming"/>
+                    <connections/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

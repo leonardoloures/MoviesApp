@@ -1,7 +1,5 @@
-using Foundation;
 using System;
 using UIKit;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MoviesApp
@@ -10,6 +8,8 @@ namespace MoviesApp
     {
 		private MoviesTableSource MoviesTableSource;
 		private int NextPage = 1;
+
+        private UISearchController SearchController;
 
         public MoviesTableController (IntPtr handle) : base (handle)
         {
@@ -23,7 +23,9 @@ namespace MoviesApp
 			this.TableView.Source = this.MoviesTableSource;
 
 			await this.LoadMoreMovies();
-		}
+
+            this.ShowSearchBar();
+        }
 
 		public async Task LoadMoreMovies()
 		{
@@ -40,5 +42,27 @@ namespace MoviesApp
 			this.MoviesTableSource.AddMovies(moreMovies);
 			this.TableView.ReloadData();
 		}
+
+        private void ShowSearchBar()
+        {
+            var searchResultsController = new SearchResultsViewController(this.MoviesTableSource.Movies, this.NavigationController);
+
+            var searchUpdater = new SearchResultsUpdater();
+            searchUpdater.UpdateSearchResults += searchResultsController.Search;
+
+            this.SearchController = new UISearchController(searchResultsController)
+            {
+                SearchResultsUpdater = searchUpdater
+            };
+
+            this.SearchController.SearchBar.SizeToFit();
+            this.SearchController.SearchBar.SearchBarStyle = UISearchBarStyle.Minimal;
+            this.SearchController.SearchBar.Placeholder = "Search movie";
+
+            this.SearchController.HidesNavigationBarDuringPresentation = true;
+            this.DefinesPresentationContext = true;
+
+            this.TableView.TableHeaderView = this.SearchController.SearchBar;
+        }
     }
 }

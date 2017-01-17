@@ -8,7 +8,7 @@ namespace MoviesApp
 {
     public class MoviesTableSource: UITableViewSource
     {
-        private List<Movie> Movies;
+        public List<Movie> Movies { get; set; }
 
         private string MovieCellIdentifier = "MovieCell";
         private string LoadingCellIdentifier = "LoadingCell";
