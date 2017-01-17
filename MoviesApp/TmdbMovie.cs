@@ -13,6 +13,7 @@ namespace MoviesApp
 		public string poster_path { get; set; }
         public IList<int> genre_ids { get; set; }
         public decimal vote_average { get; set; }
+        public string original_title { get; set; }
 
         public Movie ToMovie(TmdbGenreMovieListResponse tmdbGenreMovieList)
 		{
@@ -23,6 +24,7 @@ namespace MoviesApp
 				Overview = this.overview,
                 Genres = this.GetGenres(tmdbGenreMovieList),
                 Stars = this.vote_average,
+                OriginalTitle = this.original_title,
 				PosterUrl = this.GetPosterUrl()
 			};
 

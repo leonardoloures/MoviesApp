@@ -17,6 +17,7 @@ namespace MoviesApp
 		public string PosterUrl { get; set; }
         public List<string> Genres { get; set; }
         public decimal Stars { get; set; }
+        public string OriginalTitle { get; set; }
 
 		private UIImage PosterImage;
 
