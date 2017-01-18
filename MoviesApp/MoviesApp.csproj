@@ -101,48 +101,53 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Source\" />
+    <Folder Include="Source\Screens\" />
+    <Folder Include="Source\Screens\MovieDetail\" />
+    <Folder Include="Source\Screens\MoviesList\" />
+    <Folder Include="Source\Tmdb\" />
+    <Folder Include="Source\Model\" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="LaunchScreen.storyboard" />
-    <InterfaceDefinition Include="Main.storyboard" />
+    <InterfaceDefinition Include="Source\LaunchScreen.storyboard" />
+    <InterfaceDefinition Include="Source\Main.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
-    <None Include="Entitlements.plist" />
-    <None Include="packages.config" />
+    <None Include="Source\Entitlements.plist" />
+    <None Include="Source\packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actor.cs" />
-    <Compile Include="ActorView.cs" />
-    <Compile Include="AppDelegate.cs" />
-    <Compile Include="Main.cs" />
-    <Compile Include="Movie.cs" />
-    <Compile Include="MovieController.cs" />
-    <Compile Include="MovieController.designer.cs">
+    <Compile Include="Source\AppDelegate.cs" />
+    <Compile Include="Source\Main.cs" />
+    <Compile Include="Source\Screens\MovieDetail\ActorView.cs" />
+    <Compile Include="Source\Screens\MovieDetail\MovieController.cs" />
+    <Compile Include="Source\Screens\MovieDetail\MovieController.designer.cs">
       <DependentUpon>MovieController.cs</DependentUpon>
     </Compile>
-    <Compile Include="MoviesTableController.cs" />
-    <Compile Include="MoviesTableController.designer.cs">
+    <Compile Include="Source\Screens\MoviesList\MoviesTableController.cs" />
+    <Compile Include="Source\Screens\MoviesList\MoviesTableController.designer.cs">
       <DependentUpon>MoviesTableController.cs</DependentUpon>
     </Compile>
-    <Compile Include="MoviesTableSource.cs" />
-    <Compile Include="SearchResultsUpdater.cs" />
-    <Compile Include="SearchResultsViewController.cs" />
-    <Compile Include="TableViewLoadingCell.cs" />
-    <Compile Include="TableViewLoadingCell.designer.cs">
+    <Compile Include="Source\Screens\MoviesList\MoviesTableSource.cs" />
+    <Compile Include="Source\Tmdb\Tmdb.cs" />
+    <Compile Include="Source\Tmdb\TmdbActor.cs" />
+    <Compile Include="Source\Tmdb\TmdbDiscoverMovieResponse.cs" />
+    <Compile Include="Source\Tmdb\TmdbGenre.cs" />
+    <Compile Include="Source\Tmdb\TmdbGenreMovieListResponse.cs" />
+    <Compile Include="Source\Tmdb\TmdbMovie.cs" />
+    <Compile Include="Source\Tmdb\TmdbMovieCreditsResponse.cs" />
+    <Compile Include="Source\Screens\MoviesList\TableViewLoadingCell.cs" />
+    <Compile Include="Source\Screens\MoviesList\TableViewLoadingCell.designer.cs">
       <DependentUpon>TableViewLoadingCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="TableViewMovieCell.cs" />
-    <Compile Include="TableViewMovieCell.designer.cs">
+    <Compile Include="Source\Screens\MoviesList\TableViewMovieCell.cs" />
+    <Compile Include="Source\Screens\MoviesList\TableViewMovieCell.designer.cs">
       <DependentUpon>TableViewMovieCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tmdb.cs" />
-    <Compile Include="TmdbActor.cs" />
-    <Compile Include="TmdbDiscoverMovieResponse.cs" />
-    <Compile Include="TmdbGenre.cs" />
-    <Compile Include="TmdbGenreMovieListResponse.cs" />
-    <Compile Include="TmdbMovie.cs" />
-    <Compile Include="TmdbMovieCreditsResponse.cs" />
+    <Compile Include="Source\Screens\MoviesList\SearchResultsUpdater.cs" />
+    <Compile Include="Source\Screens\MoviesList\SearchResultsViewController.cs" />
+    <Compile Include="Source\Model\Actor.cs" />
+    <Compile Include="Source\Model\Movie.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">
