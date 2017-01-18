@@ -7,7 +7,7 @@ namespace MoviesApp
 {
     public partial class MoviesTableController : UITableViewController
     {
-        public delegate Task<List<Movie>> GetMoviesDelegate(int page, List<Tuple<string, string>> parameters);
+        public delegate Task<MoviesResponse> GetMoviesDelegate(int page, List<Tuple<string, string>> parameters);
         public GetMoviesDelegate GetMovies { get; set; }
         public List<Tuple<string, string>> GetMoviesParameters { get; set; }
         public bool LoadFirstPageAutomatically { get; set; }
@@ -46,21 +46,27 @@ namespace MoviesApp
             {
                 await this.LoadMoreMovies();
             }
+            else
+            {
+                this.MoviesTableSource.EnableLoadingCell(this.TableView, false);
+            }
         }
 
 		public async Task LoadMoreMovies()
 		{
+            this.MoviesTableSource.EnableLoadingCell(this.TableView, true);
 			this.MoviesTableSource.StartLoading(this.TableView);
 
-            var moreMovies = await GetMovies(this.NextPage, this.GetMoviesParameters);
-			if (moreMovies.Count > 0)
+            var moviesResponse = await GetMovies(this.NextPage, this.GetMoviesParameters);
+			if (moviesResponse.Movies.Count > 0)
 			{
 				this.NextPage++;
 			}
 
 			this.MoviesTableSource.StopLoading(this.TableView);
+            this.MoviesTableSource.EnableLoadingCell(this.TableView, moviesResponse.TotalPages >= this.NextPage);
 
-			this.MoviesTableSource.AddMovies(moreMovies);
+            this.MoviesTableSource.AddMovies(moviesResponse.Movies);
 			this.TableView.ReloadData();
 		}
 
@@ -113,6 +119,19 @@ namespace MoviesApp
                 {
                     this.SearchMovies(this.SearchController.SearchBar.Text);
                 }));
+            };
+
+            this.SearchController.SearchBar.CancelButtonClicked += (sender, e) =>
+            {
+                this.ClearMovies();
+            };
+
+            this.SearchController.SearchBar.TextChanged += (sender, e) =>
+            {
+                if (this.SearchController.SearchBar.Text == string.Empty)
+                {
+                    this.ClearMovies();
+                }
             };
         }
 

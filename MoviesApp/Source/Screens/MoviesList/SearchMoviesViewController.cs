@@ -70,7 +70,7 @@ namespace MoviesApp
             this.Searching = true;
             Tmdb.SearchMovies(1, parameters).ContinueWith(task => InvokeOnMainThread(() =>
             {
-                this.Movies = task.Result;
+                this.Movies = task.Result.Movies;
                 this.TableView.ReloadData();
                 this.Searching = false;
 

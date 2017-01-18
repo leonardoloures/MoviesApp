@@ -8,6 +8,12 @@ using Newtonsoft.Json;
 
 namespace MoviesApp
 {
+    public class MoviesResponse
+    {
+        public int TotalPages { get; set; }
+        public List<Movie> Movies { get; set; }
+    }
+
 	// This class is responsible for querying TMDb API
 	public static class Tmdb
 	{
@@ -28,7 +34,7 @@ namespace MoviesApp
         private const string ParameterValueSortByPrimaryReleaseDateDesc = "primary_release_date.desc";
         private const string ParameterValueSortByVoteAverageDesc = "vote_average.desc";
 
-		public async static Task<List<Movie>> GetUpcomingMovies(int page, List<Tuple<string, string>> parameters)
+        public async static Task<MoviesResponse> GetUpcomingMovies(int page, List<Tuple<string, string>> parameters)
 		{
 			var movies = new List<Movie>();
 
@@ -39,10 +45,14 @@ namespace MoviesApp
                 movies = tmdbDiscoverMovieResponse.ToMovieList(tmdbGenreMovieListResponse);
             }
 
-			return movies;
+            return new MoviesResponse
+            {
+                TotalPages = tmdbDiscoverMovieResponse.total_pages,
+                Movies = movies
+            };
 		}
 
-        public async static Task<List<Movie>> GetAllMovies(int page, List<Tuple<string, string>> parameters)
+        public async static Task<MoviesResponse> GetAllMovies(int page, List<Tuple<string, string>> parameters)
         {
             var movies = new List<Movie>();
 
@@ -53,10 +63,14 @@ namespace MoviesApp
                 movies = tmdbDiscoverMovieResponse.ToMovieList(tmdbGenreMovieListResponse);
             }
 
-            return movies;
+            return new MoviesResponse
+            {
+                TotalPages = tmdbDiscoverMovieResponse.total_pages,
+                Movies = movies
+            };
         }
 
-        public async static Task<List<Movie>> SearchMovies(int page, List<Tuple<string, string>> parameters)
+        public async static Task<MoviesResponse> SearchMovies(int page, List<Tuple<string, string>> parameters)
         {
             var movies = new List<Movie>();
 
@@ -64,7 +78,11 @@ namespace MoviesApp
             var tmdbGenreMovieListResponse = await Tmdb.CallGenreMovieList();
             movies = tmdbDiscoverMovieResponse.ToMovieList(tmdbGenreMovieListResponse);
 
-            return movies;
+            return new MoviesResponse
+            {
+                TotalPages = tmdbDiscoverMovieResponse.total_pages,
+                Movies = movies
+            };
         }
 
         public async static Task<List<Actor>> GetCast(int movieId)

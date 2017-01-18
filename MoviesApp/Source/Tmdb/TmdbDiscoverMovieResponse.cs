@@ -7,6 +7,7 @@ namespace MoviesApp
 	{
 		public int page { get; set; }
 		public IList<TmdbMovie> results;
+        public int total_pages { get; set; }
 
         public List<Movie> ToMovieList(TmdbGenreMovieListResponse tmdbGenreMovieListResponse)
 		{

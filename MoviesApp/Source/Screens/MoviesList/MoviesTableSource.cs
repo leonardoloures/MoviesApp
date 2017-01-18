@@ -16,6 +16,8 @@ namespace MoviesApp
         private MoviesTableController MoviesTableController;
         private UINavigationController NavigationController;
 
+        private bool LoadingCellEnabled = true;
+
         private bool Loading = false;
 
         public MoviesTableSource(MoviesTableController moviesTableController)
@@ -26,9 +28,15 @@ namespace MoviesApp
             this.NavigationController = moviesTableController.NavigationController;
         }
 
+        public void EnableLoadingCell(UITableView tableView, bool enabled)
+        {
+            this.LoadingCellEnabled = enabled;
+            tableView.ReloadData();
+        }
+
         public override nint RowsInSection(UITableView tableview, nint section)
         {
-            return this.Movies.Count + 1;
+            return this.Movies.Count + (this.LoadingCellEnabled ? 1 : 0);
         }
 
         public void AddMovies(List<Movie> movies)
@@ -149,11 +157,14 @@ namespace MoviesApp
 
         private void ReloadLoadingCell(UITableView tableView)
         {
-            var rowsToReload = new NSIndexPath[]
+            if (this.LoadingCellEnabled)
             {
-                NSIndexPath.FromRowSection(this.Movies.Count, 0)
-            };
-            tableView.ReloadRows(rowsToReload, UITableViewRowAnimation.None);
+                var rowsToReload = new NSIndexPath[]
+                {
+                    NSIndexPath.FromRowSection(this.Movies.Count, 0)
+                };
+                tableView.ReloadRows(rowsToReload, UITableViewRowAnimation.None);
+            }
         }
     }
 }

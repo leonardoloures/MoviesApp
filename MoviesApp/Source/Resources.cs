@@ -12,7 +12,7 @@ namespace MoviesApp
 
         public static UIImage DefaultProfile()
         {
-            return UIImage.FromBundle("profileDefault.jpg");
+            return UIImage.FromBundle("profileDefault.png");
         }
 
         public static UIImage Calendar()

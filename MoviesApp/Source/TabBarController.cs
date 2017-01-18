@@ -32,10 +32,6 @@ namespace MoviesApp
             var searchMoviesController = searchMoviesNavigationController.ViewControllers[0] as MoviesTableController;
             searchMoviesController.Title = "Search";
             searchMoviesController.GetMovies = Tmdb.SearchMovies;
-            searchMoviesController.GetMoviesParameters = new List<Tuple<string, string>>
-            {
-                new Tuple<string, string>("query", "TODO")
-            };
             searchMoviesController.LoadFirstPageAutomatically = false;
             searchMoviesController.EnableFilterBar = false;
             searchMoviesController.EnableSearchBar = true;
