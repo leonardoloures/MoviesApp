@@ -20,6 +20,11 @@ namespace MoviesApp
             return UIImage.FromBundle("calendar.png");
         }
 
+        public static UIImage Search()
+        {
+            return UIImage.FromBundle("search.png");
+        }
+
         public static UIImage Star()
         {
             return UIImage.FromBundle("star.png");

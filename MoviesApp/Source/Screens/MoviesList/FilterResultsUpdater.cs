@@ -3,7 +3,7 @@ using UIKit;
 
 namespace MoviesApp
 {
-    public class SearchResultsUpdater : UISearchResultsUpdating
+    public class FilterResultsUpdater : UISearchResultsUpdating
     {
         public event Action<string> UpdateSearchResults = delegate { };
 

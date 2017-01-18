@@ -146,8 +146,8 @@
     <Compile Include="Source\Screens\MoviesList\TableViewMovieCell.designer.cs">
       <DependentUpon>TableViewMovieCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="Source\Screens\MoviesList\SearchResultsUpdater.cs" />
-    <Compile Include="Source\Screens\MoviesList\SearchResultsViewController.cs" />
+    <Compile Include="Source\Screens\MoviesList\FilterResultsUpdater.cs" />
+    <Compile Include="Source\Screens\MoviesList\FilterResultsViewController.cs" />
     <Compile Include="Source\Model\Actor.cs" />
     <Compile Include="Source\Model\Movie.cs" />
     <Compile Include="Source\Resources.cs" />
@@ -155,6 +155,8 @@
     <Compile Include="Source\TabBarController.designer.cs">
       <DependentUpon>TabBarController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Source\Screens\MoviesList\SearchMoviesViewController.cs" />
+    <Compile Include="Source\Screens\MoviesList\SearchMoviesUpdater.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">
@@ -168,6 +170,7 @@
     <BundleResource Include="Resources\movie.png" />
     <BundleResource Include="Resources\posterDefault.jpg" />
     <BundleResource Include="Resources\star.png" />
+    <BundleResource Include="Resources\search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

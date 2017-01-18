@@ -257,6 +257,7 @@
                     <connections>
                         <segue id="805" destination="224" kind="relationship" relationship="viewControllers"/>
                         <segue id="870" destination="224" kind="relationship" relationship="viewControllers"/>
+                        <segue id="940" destination="224" kind="relationship" relationship="viewControllers"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="681" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -273,5 +274,6 @@
         <image name="movie.png" width="512" height="512"/>
         <image name="posterDefault.jpg" width="550" height="712"/>
         <image name="star.png" width="32" height="32"/>
+        <image name="search.png" width="32" height="32"/>
     </resources>
 </document>

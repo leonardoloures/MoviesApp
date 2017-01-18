@@ -4,7 +4,7 @@ using UIKit;
 
 namespace MoviesApp
 {
-    public class SearchResultsViewController: UITableViewController
+    public class FilterResultsViewController: UITableViewController
     {
         private const string ItemCellIdentifier = "ItemCellId";
 
@@ -13,7 +13,7 @@ namespace MoviesApp
 
         private new UINavigationController NavigationController;
 
-        public SearchResultsViewController(List<Movie> allMovies, UINavigationController navigationController)
+        public FilterResultsViewController(List<Movie> allMovies, UINavigationController navigationController)
         {
             this.AllMovies = allMovies;
             this.MoviesFound = new List<Movie>();
@@ -50,9 +50,9 @@ namespace MoviesApp
             }
         }
 
-        public void Search(string forSearchString)
+        public void Filter(string forFilterString)
         {
-            this.MoviesFound = this.AllMovies.FindAll(x => x.Title.IndexOf(forSearchString, StringComparison.OrdinalIgnoreCase) >= 0);
+            this.MoviesFound = this.AllMovies.FindAll(x => x.Title.IndexOf(forFilterString, StringComparison.OrdinalIgnoreCase) >= 0);
             this.TableView.ReloadData();
         }
     }
