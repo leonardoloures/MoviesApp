@@ -20,6 +20,10 @@ namespace MoviesApp
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel CastHeadingText { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel GenresText { get; set; }
 
         [Outlet]
@@ -63,6 +67,11 @@ namespace MoviesApp
             if (CalendarImageView != null) {
                 CalendarImageView.Dispose ();
                 CalendarImageView = null;
+            }
+
+            if (CastHeadingText != null) {
+                CastHeadingText.Dispose ();
+                CastHeadingText = null;
             }
 
             if (GenresText != null) {

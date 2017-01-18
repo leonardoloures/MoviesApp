@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Source\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -111,21 +112,22 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs" />
+    <Compile Include="Actor.cs" />
+    <Compile Include="ActorView.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="MoviesTableController.cs" />
-    <Compile Include="MoviesTableController.designer.cs">
-      <DependentUpon>MoviesTableController.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Main.cs" />
     <Compile Include="Movie.cs" />
-    <Compile Include="MoviesTableSource.cs" />
-    <Compile Include="TmdbDiscoverMovieResponse.cs" />
-    <Compile Include="TmdbMovie.cs" />
-    <Compile Include="Tmdb.cs" />
     <Compile Include="MovieController.cs" />
     <Compile Include="MovieController.designer.cs">
       <DependentUpon>MovieController.cs</DependentUpon>
     </Compile>
+    <Compile Include="MoviesTableController.cs" />
+    <Compile Include="MoviesTableController.designer.cs">
+      <DependentUpon>MoviesTableController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MoviesTableSource.cs" />
+    <Compile Include="SearchResultsUpdater.cs" />
+    <Compile Include="SearchResultsViewController.cs" />
     <Compile Include="TableViewLoadingCell.cs" />
     <Compile Include="TableViewLoadingCell.designer.cs">
       <DependentUpon>TableViewLoadingCell.cs</DependentUpon>
@@ -134,10 +136,13 @@
     <Compile Include="TableViewMovieCell.designer.cs">
       <DependentUpon>TableViewMovieCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="TmdbGenreMovieListResponse.cs" />
+    <Compile Include="Tmdb.cs" />
+    <Compile Include="TmdbActor.cs" />
+    <Compile Include="TmdbDiscoverMovieResponse.cs" />
     <Compile Include="TmdbGenre.cs" />
-    <Compile Include="SearchResultsUpdater.cs" />
-    <Compile Include="SearchResultsViewController.cs" />
+    <Compile Include="TmdbGenreMovieListResponse.cs" />
+    <Compile Include="TmdbMovie.cs" />
+    <Compile Include="TmdbMovieCreditsResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">
@@ -149,6 +154,7 @@
     <BundleResource Include="Resources\posterDefault.png" />
     <BundleResource Include="Resources\calendar.png" />
     <BundleResource Include="Resources\star.jpg" />
+    <BundleResource Include="Resources\profileDefault.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

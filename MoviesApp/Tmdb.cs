@@ -14,6 +14,7 @@ namespace MoviesApp
 		private const string SecureBaseUrl = "https://api.themoviedb.org/3";
 		private const string MethodDiscoverMovie = "/discover/movie";
         private const string MethodGenreMovieList = "/genre/movie/list";
+        private const string MethodMovieCredits = "/movie/{0}/credits";
 
 		private const string ParameterApiKey = "api_key";
 		private const string ParameterPrimaryReleaseDateGreaterOrEqual = "primary_release_date.gte";
@@ -33,6 +34,16 @@ namespace MoviesApp
 
 			return movies;
 		}
+
+        public async static Task<List<Actor>> GetCast(int movieId)
+        {
+            var cast = new List<Actor>();
+
+            var tmdbMovieCreditsResponse = await Tmdb.CallMovieCredits(movieId);
+            cast = tmdbMovieCreditsResponse.ToActorList();
+
+            return cast;
+        }
 
 		private static WebRequest CreateRequest(string method, List<Tuple<string, string>> parameters)
 		{
@@ -108,6 +119,19 @@ namespace MoviesApp
             };
 
             var response = await Tmdb.CallMethod<TmdbGenreMovieListResponse>(Tmdb.MethodGenreMovieList, parameters);
+
+            return response;
+        }
+
+        private async static Task<TmdbMovieCreditsResponse> CallMovieCredits(int movieId)
+        {
+            var method = string.Format(Tmdb.MethodMovieCredits, movieId);
+            var parameters = new List<Tuple<string, string>>
+            {
+                new Tuple<string, string>(Tmdb.ParameterApiKey, Tmdb.ParameterValueApiKey)
+            };
+
+            var response = await Tmdb.CallMethod<TmdbMovieCreditsResponse>(method, parameters);
 
             return response;
         }

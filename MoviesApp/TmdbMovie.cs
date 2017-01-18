@@ -7,6 +7,7 @@ namespace MoviesApp
 	// This class represents the TMDb movie returned in queries to the API
 	public class TmdbMovie
 	{
+        public int id { get; set; }
 		public string title { get; set; }
 		public DateTime release_date { get; set; }
 		public string overview { get; set; }
@@ -19,6 +20,7 @@ namespace MoviesApp
 		{
 			var movie = new Movie()
 			{
+                Id = this.id,
 				Title = this.title,
 				ReleaseDate = this.release_date,
 				Overview = this.overview,
@@ -35,7 +37,7 @@ namespace MoviesApp
 		{
 			// TODO: get these values dynamically
 			const string secure_base_url = "https://image.tmdb.org/t/p/";
-			const string poster_size = "w500";
+			const string poster_size = "w342";
 
 			return secure_base_url + poster_size + this.poster_path;
 		}

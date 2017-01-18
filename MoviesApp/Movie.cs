@@ -11,6 +11,7 @@ namespace MoviesApp
 	// This class is the internal representation of a movie in MoviesApp
 	public class Movie
 	{
+        public int Id { get; set; }
 		public string Title { get; set; }
 		public DateTime ReleaseDate { get; set; }
 		public string Overview { get; set; }
@@ -18,6 +19,7 @@ namespace MoviesApp
         public List<string> Genres { get; set; }
         public decimal Stars { get; set; }
         public string OriginalTitle { get; set; }
+        public List<Actor> Cast { get; set; }
 
 		private UIImage PosterImage;
 
