@@ -1,15 +1,21 @@
 using System;
-using UIKit;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using UIKit;
 
 namespace MoviesApp
 {
     public partial class MoviesTableController : UITableViewController
     {
-		private MoviesTableSource MoviesTableSource;
-		private int NextPage = 1;
+        private MoviesTableSource MoviesTableSource;
+        private int NextPage = 1;
 
         private UISearchController SearchController;
+
+        public delegate Task<List<Movie>> GetMoviesDelegate(int page);
+        public GetMoviesDelegate GetMovies { get; set; }
+
+        public int test { get; set; }
 
         public MoviesTableController (IntPtr handle) : base (handle)
         {
@@ -31,7 +37,7 @@ namespace MoviesApp
 		{
 			this.MoviesTableSource.StartLoading(this.TableView);
 
-			var moreMovies = await Tmdb.GetUpcomingMovies(this.NextPage);
+            var moreMovies = await GetMovies(this.NextPage);
 			if (moreMovies.Count > 0)
 			{
 				this.NextPage++;

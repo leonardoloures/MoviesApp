@@ -23,17 +23,29 @@ namespace MoviesApp
 
         private const string ParameterValueApiKey = "1f54bd990f1cdfb230adb312546d765d";
         private const string ParameterValueSortByPrimaryReleaseDateAsc = "primary_release_date.asc";
+        private const string ParameterValueSortByVoteAverageDesc = "vote_average.desc";
 
 		public async static Task<List<Movie>> GetUpcomingMovies(int page)
 		{
 			var movies = new List<Movie>();
 
-            var tmdbDiscoverMovieResponse = await Tmdb.CallDiscoverMovie(DateTime.Today, page);
+            var tmdbDiscoverMovieResponse = await Tmdb.CallDiscoverMovieUpcoming(DateTime.Today, page);
             var tmdbGenreMovieListResponse = await Tmdb.CallGenreMovieList();
             movies = tmdbDiscoverMovieResponse.ToMovieList(tmdbGenreMovieListResponse);
 
 			return movies;
 		}
+
+        public async static Task<List<Movie>> GetAllMovies(int page)
+        {
+            var movies = new List<Movie>();
+
+            var tmdbDiscoverMovieResponse = await Tmdb.CallDiscoverMovieAll(page);
+            var tmdbGenreMovieListResponse = await Tmdb.CallGenreMovieList();
+            movies = tmdbDiscoverMovieResponse.ToMovieList(tmdbGenreMovieListResponse);
+
+            return movies;
+        }
 
         public async static Task<List<Actor>> GetCast(int movieId)
         {
@@ -96,7 +108,7 @@ namespace MoviesApp
             return default(T);
         }
 
-        private async static Task<TmdbDiscoverMovieResponse> CallDiscoverMovie(DateTime releaseDateGreaterOrEqual, int page)
+        private async static Task<TmdbDiscoverMovieResponse> CallDiscoverMovieUpcoming(DateTime releaseDateGreaterOrEqual, int page)
 		{
 			var parameters = new List<Tuple<string, string>>
 			{
@@ -110,6 +122,21 @@ namespace MoviesApp
 
 			return response;
 		}
+
+        private async static Task<TmdbDiscoverMovieResponse> CallDiscoverMovieAll(int page)
+        {
+            var parameters = new List<Tuple<string, string>>
+            {
+                new Tuple<string, string>(Tmdb.ParameterApiKey, Tmdb.ParameterValueApiKey),
+                new Tuple<string, string>(Tmdb.ParameterPage, page.ToString()),
+                    new Tuple<string, string>(Tmdb.ParameterSortBy, Tmdb.ParameterValueSortByVoteAverageDesc)
+            };
+
+            var response = await Tmdb.CallMethod<TmdbDiscoverMovieResponse>(Tmdb.MethodDiscoverMovie, parameters);
+
+            return response;
+        }
+
 
         private async static Task<TmdbGenreMovieListResponse> CallGenreMovieList()
         {

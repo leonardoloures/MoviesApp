@@ -13,7 +13,7 @@ namespace MoviesApp
 	{
         public int Id { get; set; }
 		public string Title { get; set; }
-		public DateTime ReleaseDate { get; set; }
+		public DateTime? ReleaseDate { get; set; }
 		public string Overview { get; set; }
 		public string PosterUrl { get; set; }
         public List<string> Genres { get; set; }
@@ -35,7 +35,7 @@ namespace MoviesApp
 					{
 						if (data == null)
 						{
-							this.PosterImage = UIImage.FromBundle("posterDefault.png");
+                            this.PosterImage = Resources.DefaultPoster();
 						}
 						else
 						{

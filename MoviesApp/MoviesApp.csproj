@@ -97,6 +97,8 @@
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\movie120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\movie180.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -113,8 +115,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
-    <None Include="Source\Entitlements.plist" />
     <None Include="Source\packages.config" />
+    <None Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Source\AppDelegate.cs" />
@@ -148,6 +150,11 @@
     <Compile Include="Source\Screens\MoviesList\SearchResultsViewController.cs" />
     <Compile Include="Source\Model\Actor.cs" />
     <Compile Include="Source\Model\Movie.cs" />
+    <Compile Include="Source\Resources.cs" />
+    <Compile Include="Source\TabBarController.cs" />
+    <Compile Include="Source\TabBarController.designer.cs">
+      <DependentUpon>TabBarController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">
@@ -156,10 +163,11 @@
     </XamarinComponentReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\posterDefault.png" />
     <BundleResource Include="Resources\calendar.png" />
-    <BundleResource Include="Resources\star.jpg" />
     <BundleResource Include="Resources\profileDefault.png" />
+    <BundleResource Include="Resources\movie.png" />
+    <BundleResource Include="Resources\posterDefault.jpg" />
+    <BundleResource Include="Resources\star.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

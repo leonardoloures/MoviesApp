@@ -19,7 +19,7 @@ namespace MoviesApp
 
             this.ProfileImage = new UIImageView()
             {
-                Image = UIImage.FromBundle("profileDefault.png"),
+                Image = Resources.DefaultProfile(),
                 ContentMode = UIViewContentMode.ScaleAspectFit
             };
 

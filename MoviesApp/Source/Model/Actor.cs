@@ -27,7 +27,7 @@ namespace MoviesApp
                     {
                         if (data == null)
                         {
-                            this.ProfileImage = UIImage.FromBundle("profileDefault.png");
+                            this.ProfileImage = Resources.DefaultProfile();
                         }
                         else
                         {

@@ -89,11 +89,11 @@ namespace MoviesApp
 
             cell.UpdateCell(
                 movie.Title,
-                movie.ReleaseDate.ToString("dd MMM yyyy"),
+                movie.ReleaseDate?.ToString("dd MMM yyyy"),
                 movie.GetGenres(),
                 movie.Overview,
                 movie.Stars > 0 ? movie.Stars.ToString() : string.Empty);
-            cell.UpdateImage(UIImage.FromBundle("posterDefault.png"));
+            cell.UpdateImage(Resources.DefaultPoster());
 
             movie.GetPosterImage().ContinueWith(task => InvokeOnMainThread(() =>
             {

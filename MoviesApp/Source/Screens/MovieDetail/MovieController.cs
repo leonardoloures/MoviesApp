@@ -32,7 +32,7 @@ namespace MoviesApp
             base.ViewDidLoad();
 
             this.TitleText.Text = this.Movie.Title;
-            this.ReleaseDateText.Text = this.Movie.ReleaseDate.ToString("d MMM yyyy");
+            this.ReleaseDateText.Text = this.Movie.ReleaseDate?.ToString("d MMM yyyy");
             this.OverviewText.Text = this.Movie.Overview;
             this.StarsText.Text = this.Movie.Stars > 0 ? this.Movie.Stars.ToString() : string.Empty;
             this.StarsImageView.Hidden = this.Movie.Stars <= 0;
