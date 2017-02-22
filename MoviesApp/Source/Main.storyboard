@@ -182,7 +182,7 @@
                                 <rect key="frame" x="20" y="20" width="24" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="630" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" image="star.jpg">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="630" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" image="star.png">
                                 <rect key="frame" x="337" y="20" width="24" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             </imageView>
