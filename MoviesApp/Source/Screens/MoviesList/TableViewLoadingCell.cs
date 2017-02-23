@@ -12,7 +12,14 @@ namespace MoviesApp
 
 		public TableViewLoadingCell(UITableViewCellStyle style, string reuseIdentifier) : base(style, reuseIdentifier)
 		{
-		}
+        }
+
+        public override void LayoutSubviews()
+        {
+            base.LayoutSubviews();
+
+            this.TitleText.Text = Resources.LocalizedString("MoviesList.More");
+        }
 
 		public void StartAnimating()
 		{

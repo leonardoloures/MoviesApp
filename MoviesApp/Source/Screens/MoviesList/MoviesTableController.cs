@@ -84,7 +84,7 @@ namespace MoviesApp
 
             this.FilterController.SearchBar.SizeToFit();
             this.FilterController.SearchBar.SearchBarStyle = UISearchBarStyle.Minimal;
-            this.FilterController.SearchBar.Placeholder = "Filter movie";
+            this.FilterController.SearchBar.Placeholder = Resources.LocalizedString("MoviesList.FilterMovie");
 
             this.FilterController.HidesNavigationBarDuringPresentation = true;
             this.DefinesPresentationContext = true;
@@ -106,7 +106,7 @@ namespace MoviesApp
 
             this.SearchController.SearchBar.SizeToFit();
             this.SearchController.SearchBar.SearchBarStyle = UISearchBarStyle.Minimal;
-            this.SearchController.SearchBar.Placeholder = "Search movie";
+            this.SearchController.SearchBar.Placeholder = Resources.LocalizedString("MoviesList.SearchMovie");
 
             this.SearchController.HidesNavigationBarDuringPresentation = false;
             this.DefinesPresentationContext = true;
@@ -147,11 +147,29 @@ namespace MoviesApp
             this.LoadMoreMovies();
         }
 
-        private void ClearMovies()
+        public void ClearMovies()
         {
             this.NextPage = 1;
-            this.MoviesTableSource.Movies.Clear();
-            this.TableView.ReloadData();
+            if (this.MoviesTableSource != null)
+            {
+                this.MoviesTableSource.Movies.Clear();
+                this.TableView.ReloadData();
+            }
+        }
+
+        public void RefreshLanguage()
+        {
+            this.ClearMovies();
+
+            if (this.FilterController != null)
+            {
+                this.FilterController.SearchBar.Placeholder = Resources.LocalizedString("MoviesList.FilterMovie");
+            }
+
+            if (this.SearchController != null)
+            {
+                this.SearchController.SearchBar.Placeholder = Resources.LocalizedString("MoviesList.SearchMovie");
+            }
         }
     }
 }

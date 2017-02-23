@@ -31,13 +31,19 @@ namespace MoviesApp
         {
             base.ViewDidLoad();
 
+            this.Title = Resources.LocalizedString("MovieDetail.Title");
+            this.OverviewHeadingText.Text = Resources.LocalizedString("MovieDetail.Overview");
+            this.CastHeadingText.Text = Resources.LocalizedString("MovieDetail.Cast");
+
             this.TitleText.Text = this.Movie.Title;
             this.ReleaseDateText.Text = this.Movie.ReleaseDate?.ToString("d MMM yyyy");
             this.OverviewText.Text = this.Movie.Overview;
             this.StarsText.Text = this.Movie.Stars > 0 ? this.Movie.Stars.ToString() : string.Empty;
             this.StarsImageView.Hidden = this.Movie.Stars <= 0;
             this.GenresText.Text = this.Movie.GetGenres();
-            this.OriginalTitleText.Text = this.Movie.OriginalTitle + " (original title)";
+            this.OriginalTitleText.Text = string.Format("{0} ({1})",
+                                                        this.Movie.OriginalTitle,
+                                                        Resources.LocalizedString("MovieDetail.OriginalTitle"));
 
             this.CastScrollView = new UIScrollView();
             this.ScrollView.AddSubview(this.CastScrollView);

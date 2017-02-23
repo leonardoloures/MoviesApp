@@ -1,4 +1,5 @@
 ﻿using System;
+using Foundation;
 using UIKit;
 
 namespace MoviesApp
@@ -28,6 +29,13 @@ namespace MoviesApp
         public static UIImage Star()
         {
             return UIImage.FromBundle("star.png");
+        }
+
+        public static string LocalizedString(string key)
+        {
+            var path = NSBundle.MainBundle.PathForResource(Settings.LanguageCodeForMenu(), "lproj");
+            var localizedBundle = NSBundle.FromPath(path);
+            return localizedBundle.LocalizedString(key, key);
         }
     }
 }

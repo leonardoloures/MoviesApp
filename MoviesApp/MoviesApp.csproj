@@ -109,6 +109,9 @@
     <Folder Include="Source\Screens\MoviesList\" />
     <Folder Include="Source\Tmdb\" />
     <Folder Include="Source\Model\" />
+    <Folder Include="Resources\pt.lproj\" />
+    <Folder Include="Resources\en.lproj\" />
+    <Folder Include="Source\Screens\Settings\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Source\LaunchScreen.storyboard" />
@@ -158,6 +161,17 @@
     </Compile>
     <Compile Include="Source\Screens\MoviesList\SearchMoviesViewController.cs" />
     <Compile Include="Source\Screens\MoviesList\SearchMoviesUpdater.cs" />
+    <Compile Include="Source\Screens\Settings\SettingsTableController.cs" />
+    <Compile Include="Source\Screens\Settings\SettingsTableController.designer.cs">
+      <DependentUpon>SettingsTableController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Screens\Settings\SettingsTableSource.cs" />
+    <Compile Include="Source\Screens\Settings\ItemsTableController.cs" />
+    <Compile Include="Source\Screens\Settings\ItemsTableController.designer.cs">
+      <DependentUpon>ItemsTableController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Screens\Settings\ItemsTableSource.cs" />
+    <Compile Include="Source\Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">
@@ -172,6 +186,9 @@
     <BundleResource Include="Resources\posterDefault.jpg" />
     <BundleResource Include="Resources\star.png" />
     <BundleResource Include="Resources\search.png" />
+    <BundleResource Include="Resources\en.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\pt.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

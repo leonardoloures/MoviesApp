@@ -28,6 +28,7 @@ namespace MoviesApp
 		private const string ParameterPage = "page";
         private const string ParameterSortBy = "sort_by";
         private const string ParameterQuery = "query";
+        private const string ParameterLanguage = "language";
 
         private const string ParameterValueApiKey = "1f54bd990f1cdfb230adb312546d765d";
         private const string ParameterValueSortByPrimaryReleaseDateAsc = "primary_release_date.asc";
@@ -101,6 +102,7 @@ namespace MoviesApp
             parameters.Add(new Tuple<string, string>(Tmdb.ParameterPrimaryReleaseDateGreaterOrEqual, DateTime.Today.ToString("yyyy-MM-dd")));
             parameters.Add(new Tuple<string, string>(Tmdb.ParameterPage, page.ToString()));
             parameters.Add(new Tuple<string, string>(Tmdb.ParameterSortBy, Tmdb.ParameterValueSortByPrimaryReleaseDateAsc));
+            parameters.Add(new Tuple<string, string>(Tmdb.ParameterLanguage, Settings.LanguageCode()));
 
             var response = await Tmdb.CallMethod<TmdbDiscoverMovieResponse>(Tmdb.MethodDiscoverMovie, parameters);
 
@@ -112,6 +114,7 @@ namespace MoviesApp
             parameters.Add(new Tuple<string, string>(Tmdb.ParameterApiKey, Tmdb.ParameterValueApiKey));
             parameters.Add(new Tuple<string, string>(Tmdb.ParameterPage, page.ToString()));
             parameters.Add(new Tuple<string, string>(Tmdb.ParameterSortBy, Tmdb.ParameterValueSortByVoteAverageDesc));
+            parameters.Add(new Tuple<string, string>(Tmdb.ParameterLanguage, Settings.LanguageCode()));
 
             var response = await Tmdb.CallMethod<TmdbDiscoverMovieResponse>(Tmdb.MethodDiscoverMovie, parameters);
 
@@ -123,7 +126,8 @@ namespace MoviesApp
         {
             var parameters = new List<Tuple<string, string>>
             {
-                        new Tuple<string, string>(Tmdb.ParameterApiKey, Tmdb.ParameterValueApiKey)
+                new Tuple<string, string>(Tmdb.ParameterApiKey, Tmdb.ParameterValueApiKey),
+                new Tuple<string, string>(Tmdb.ParameterLanguage, Settings.LanguageCode())
             };
 
             var response = await Tmdb.CallMethod<TmdbGenreMovieListResponse>(Tmdb.MethodGenreMovieList, parameters);
@@ -149,6 +153,7 @@ namespace MoviesApp
             parameters.Add(new Tuple<string, string>(Tmdb.ParameterApiKey, Tmdb.ParameterValueApiKey));
             parameters.Add(new Tuple<string, string>(Tmdb.ParameterPage, page.ToString()));
             parameters.Add(new Tuple<string, string>(Tmdb.ParameterSortBy, Tmdb.ParameterValueSortByPrimaryReleaseDateDesc));
+            parameters.Add(new Tuple<string, string>(Tmdb.ParameterLanguage, Settings.LanguageCode()));
 
             var response = await Tmdb.CallMethod<TmdbDiscoverMovieResponse>(Tmdb.MethodSearchMovie, parameters);
 
