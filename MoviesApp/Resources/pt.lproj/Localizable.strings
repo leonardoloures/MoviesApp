@@ -1,0 +1,18 @@
+﻿"TabBar.Upcoming" = "Lançamentos";
+"TabBar.All" = "Todos";
+"TabBar.Search" = "Pesquisar";
+"TabBar.Settings" = "Configurações";
+
+"MoviesList.FilterMovie" = "Filtrar filme";
+"MoviesList.SearchMovie" = "Pesquisar filme";
+"MoviesList.More" = "Mais...";
+
+"MovieDetail.Title" = "Detalhes...";
+"MovieDetail.Overview" = "Resumo";
+"MovieDetail.Cast" = "Elenco";
+"MovieDetail.OriginalTitle" = "título original";
+
+"Settings.Language" = "Idioma";
+"Settings.Language.System" = "Idioma do sistema";
+"Settings.Language.English" = "English";
+"Settings.Language.Portuguese" = "Português";
